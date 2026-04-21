@@ -1,3 +1,7 @@
-# Write a query to extract the whole table (all of the columns) from the database.
+-- Write a query to extract the whole table (all of the columns) from the database.
 
 Select * FROM workers
+
+-- Fetch all of the unique coins that were used in the sales table
+Select DISTINCT coin
+From sales
