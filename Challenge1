@@ -1,0 +1,3 @@
+# Write a query to extract the whole table (all of the columns) from the database.
+
+Select * FROM workers
