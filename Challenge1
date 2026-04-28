@@ -10,3 +10,14 @@ SELECT *
 FROM people
 -- Write your code below
 WHERE age < 20 OR age > 28
+
+-- Write a query to find all candies that are either:
+
+brown and cost 2 OR
+mixed and weigh less than 40
+
+SELECT name, color 
+FROM candies
+-- Write your code below
+WHERE color = 'brown' AND price = 2
+OR color = 'mixed' AND weight < 40
