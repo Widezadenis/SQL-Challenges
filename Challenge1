@@ -37,6 +37,11 @@ WHERE (age > 30 AND status = 'seeking' OR status = 'retired') OR
 (age < 50 AND status = 'employed' OR status = 'unemployed') OR 
 (age BETWEEN 20 AND 28);
 
-Fetch all of the colorful objects. Instead of writing colorful = 1 try to use the TRUE keyword.
+-- Fetch all of the colorful objects. Instead of writing colorful = 1 try to use the TRUE keyword.
 Select * from objects 
 where colorful is TRUE
+
+-- Fetch all of the unique names without missing values.
+Select distinct(name) from people 
+where name IS NOT NULL;
+
