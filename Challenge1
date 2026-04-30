@@ -45,3 +45,9 @@ where colorful is TRUE
 Select distinct(name) from people 
 where name IS NOT NULL;
 
+-- Return all of the ids after ordering them by the weight in descending order
+Select id
+from feathers
+order by weight desc;
+
+
