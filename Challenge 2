@@ -19,3 +19,13 @@ FROM events
 WHERE size  < 1 OR size > 100 OR
 year < 2000 OR name is NULL
 ORDER BY id DESC
+
+-- Fetch the 5 coldest places from the temperature table. Follow these steps:
+
+Sort the result in ascending order
+Limit the result to 5 rows
+
+Select place_id, avg_temp
+From temperature
+order by avg_temp
+Limit 5
