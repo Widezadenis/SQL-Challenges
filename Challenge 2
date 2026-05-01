@@ -1,0 +1,21 @@
+-- Return all of the ids after ordering them by the area in descending order. If the feathers have the same area, sort them by weight in ascending order.
+Select id
+from feathers
+order by area desc, weight asc;
+
+-- A suspicious event meets one or more of the following criteria:
+
+Its size is significantly different from the average normal event size of 50MB. For this analysis, consider files smaller than 1MB or larger than 100MB as suspicious.
+It was created before the year 2000
+It has a missing name
+Your task:
+
+Identify all suspicious events based on the criteria mentioned above.
+Return the event IDs and their names in descending order by their ID.
+
+SELECT id, name
+FROM events
+-- Write your code below
+WHERE size  < 1 OR size > 100 OR
+year < 2000 OR name is NULL
+ORDER BY id DESC
