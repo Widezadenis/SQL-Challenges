@@ -35,3 +35,8 @@ SELECT id
 FROM employees
 WHERE salary < 4000 AND status = 'married'
 ORDER BY salary;
+
+-- Return all the records from the following countries: Oman, Nicaragua, Bhutan, Senegal, Belarus
+Select * From countries
+Where country IN ("Oman", "Nicaragua", "Bhutan", "Senegal", "Belarus")
+
