@@ -40,3 +40,7 @@ ORDER BY salary;
 Select * From countries
 Where country IN ("Oman", "Nicaragua", "Bhutan", "Senegal", "Belarus")
 
+-- Fetch all of the records where the value column is between 7 and 13
+Select * From data 
+Where value BETWEEN 7 AND 13;
+
