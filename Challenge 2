@@ -50,3 +50,8 @@ From people
 Where name LIKE 'K%' AND name LIKE '%a'
 Order by name DESC;
 
+-- Fetch all of the kitchen items that the amount is less than 3 items. Change the cutlery column name to silverware 
+Select  amount, cutlery AS silverware
+From kitchen_items
+Where amount < 3
+
