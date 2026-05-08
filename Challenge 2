@@ -44,3 +44,9 @@ Where country IN ("Oman", "Nicaragua", "Bhutan", "Senegal", "Belarus")
 Select * From data 
 Where value BETWEEN 7 AND 13;
 
+-- Fetch all of the people whose name starts with K (uppercase) and ends with a (lowercase) and order the results by the names in descending order.
+Select *
+From people 
+Where name LIKE 'K%' AND name LIKE '%a'
+Order by name DESC;
+
