@@ -55,3 +55,10 @@ Select  amount, cutlery AS silverware
 From kitchen_items
 Where amount < 3
 
+-- Fetch all of the cellphone models that start with the letter m and the 3rd letter is o, the price range is between 1000 and 1500, and they support wifi_5g.
+-- Return only the cellphone model and rename it to id
+Select model AS id
+From cellphones
+Where model LIKE 'm%' AND model LIKE '__o%'
+AND price BETWEEN 1000 AND 1500 
+AND wifi_5g = 1
