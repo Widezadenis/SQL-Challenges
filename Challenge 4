@@ -9,5 +9,6 @@ Where date NOT BETWEEN '2022-12-21' AND '2023-03-20'
 Order by date DESC
 
 Fetch the IDs of all events that last less than three days
+
 Select * From events
 Where JULIANDAY(end) - JULIANDAY(start) < 3
