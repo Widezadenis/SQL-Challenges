@@ -33,3 +33,24 @@ SELECT
 FROM events
 WHERE STRFTIME('%Y', start) = '2009'
 ORDER BY duration_days DESC;
+
+
+Write a query that returns:
+
+The total number of sales transactions
+The average quantity per sale
+The maximum price per unit
+The total revenue (sum of quantity * price_per_unit)
+Your result should have these exact column names:
+
+total_transactions
+avg_quantity
+max_unit_price 
+total_revenue
+
+Select 
+COUNT(product_id) AS total_transactions, 
+AVG(quantity) AS avg_quantity, 
+MAX(price_per_unit) AS max_unit_price,
+SUM(quantity * price_per_unit) AS total_revenue
+From sales
