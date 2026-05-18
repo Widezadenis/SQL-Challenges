@@ -63,3 +63,18 @@ SELECT id, price,
     price - (SELECT AVG(price) FROM items) AS diff_from_avg 
  FROM items
  Order by diff_from_avg DESC
+
+Calculate, for each food type, the average pH and the difference between the maximum and minimum pH values.
+
+name the columns: type, ph_average, ph_max_min_diff.
+
+Sort the results by the difference in descending order.
+
+Use the ROUND(value, decimal) to round each result to two decimal places.
+
+Select type,
+ROUND(AVG(pH), 2) AS ph_average, 
+ROUND((MAX(pH) - MIN(pH)), 2) AS ph_max_min_diff
+From foods
+Group by type
+Order by ph_max_min_diff DESC
