@@ -1,0 +1,8 @@
+Create a query that fetches student_name, course_id, student_id and grade in one table. Order the result by grade in ascending order.
+Select students.name AS student_name,
+course_id, 
+student_id, 
+grade
+From grades
+Join students ON grades.student_id = students.id
+Order by grade
