@@ -10,3 +10,8 @@ Order by grade
 Calculate for each student their average grade and return the name and the average grade for each.
 Name the columns student, grade.
 Round the average to 2 decimal places and sort the result by the average grade in ascending order.
+Select students.name AS student, ROUND(AVG(grades.grade),2) AS grade
+From grades
+Join students ON grades.student_id = students.id
+Group by student
+Order by grade ASC;
