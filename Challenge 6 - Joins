@@ -53,3 +53,14 @@ Don't include cases where friend3 is the same person as friend1
 Order the results by friend1's name in descending order
 Example: If Alice is friends with Bob, and Bob is friends with Carol, then Alice-Bob-Carol would be a valid friend-of-friend connection.
 
+Select friend1.name AS friend1,
+friend2.name AS friend2,
+friend3.name AS friend3
+From friends AS friend1
+Join friends AS friend2
+ON friend1.friend_id = friend2.id
+Join friends AS friend3
+ON friend2.friend_id = friend3.id
+AND friend2.friend_id = friend3.id
+Where friend3.id != friend1.id
+Order By friend1.name DESC
