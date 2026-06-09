@@ -33,3 +33,13 @@ GROUP BY orders.customer_id
 ORDER BY orders.customer_id;
 
 _______________________________________ Self Joins ______________________________________
+
+Find pairs of friends who are mutual friends (mutual friendship exists when person A's friend_id points to person B AND person B's friend_id points to person A). Display both friends names in a single row. Name the columns friend1 and friend2.
+Note: Include in the WHERE clause the criteria friend1.id < friend2.id so that it will not include duplicate pairs
+
+Select friend1.name as friend1, friend2.name as friend2
+From friends as friend1
+JOIN friends as friend2 
+on friend1.friend_id = friend2.id -- Checks mutual relationship
+AND friend2.friend_id = friend1.id
+WHERE friend1.id < friend2.id -- helps prevent duplicates
