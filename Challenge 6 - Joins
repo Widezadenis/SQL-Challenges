@@ -31,3 +31,5 @@ JOIN products ON order_items.product_id = products.id
 WHERE products.unit_price < 10
 GROUP BY orders.customer_id
 ORDER BY orders.customer_id;
+
+_______________________________________ Self Joins ______________________________________
