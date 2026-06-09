@@ -43,3 +43,13 @@ JOIN friends as friend2
 on friend1.friend_id = friend2.id -- Checks mutual relationship
 AND friend2.friend_id = friend1.id
 WHERE friend1.id < friend2.id -- helps prevent duplicates
+
+For each person in the friends table, find all the friend-of-friend connections they have. A friend-of-friend connection occurs when person A is friends with person B, who is in turn friends with person C. List these connections as three columns:
+friend1: the starting person
+friend2: their direct friend
+friend3: their friend's friend
+Rules:
+Don't include cases where friend3 is the same person as friend1
+Order the results by friend1's name in descending order
+Example: If Alice is friends with Bob, and Bob is friends with Carol, then Alice-Bob-Carol would be a valid friend-of-friend connection.
+
