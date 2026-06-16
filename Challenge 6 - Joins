@@ -65,35 +65,3 @@ AND friend2.friend_id = friend3.id
 Where friend3.id != friend1.id
 Order By friend1.name DESC
 
-WITH date_comparisons AS (
-    -- Step 1: Compare every pair of dates for each asset
-    SELECT 
-        r1.asset_id,
-        r1.value AS newer_value,
-        r2.value AS older_value,
-        r1.date AS newer_date,
-        r2.date AS older_date,
-        (r1.value * 1.0 / r2.value) AS growth_ratio,
-        (julianday(r1.date) - julianday(r2.date)) AS day_difference
-    FROM real_estate r1
-    JOIN real_estate r2 
-        ON r1.asset_id = r2.asset_id
-        AND r1.date > r2.date  -- Ensure r1 is newer than r2
-    WHERE (julianday(r1.date) - julianday(r2.date)) >= 101  -- Only keep differences >= 101 days
-),
-max_ratios AS (
-    -- Step 2: Keep only the biggest ratio for each asset
-    SELECT 
-        asset_id,
-        MAX(growth_ratio) AS max_growth_ratio
-    FROM date_comparisons
-    GROUP BY asset_id
-)
--- Step 3: Join with potential table and calculate ratio_forecast
-SELECT 
-    mr.asset_id,
-    (mr.max_growth_ratio * 1.0 / p.forecast) AS ratio_forecast
-FROM max_ratios mr
-JOIN potential p ON mr.asset_id = p.asset_id
-WHERE (mr.max_growth_ratio * 1.0 / p.forecast) > 1
-ORDER BY ratio_forecast DESC;
