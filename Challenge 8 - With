@@ -29,3 +29,51 @@ ON ds.device_id = ds_score.device_id
 WHERE ds.opinion > (SELECT avg_quality FROM overrated_devices)
   AND ds_score.score < (SELECT avg_quality FROM overrated_devices);
 
+
+real_estate: asset_id, value, date
+potential: asset_id, forecast
+Some analysts forecast what is going to be the growth for real estate assets. We want to check if their forecast is true. 
+For each asset in the real_estate table, calculate the ratio between the value of a newer date to the value of an older date.
+For example, if there is an asset whose value in 2022-01-01 was 5 and in 2022-05-01 was 10 then that ratio is 10/5 = 2.
+Ignore all of the comparisons that the day difference between the two dates is smaller than 101.
+There are many dates for each asset so there are many ratios to compare. keep only the biggest ratio for each asset.
+Finally, divide this ratio with the matching forecast from the potential table (call this field ratio_forecast) and sort the results in descending order.
+The final result should have the asset_id and ratio_forecast.
+Keep only the assets where the ratio_forecast is bigger than 1.
+
+Note: To get a decimal solution from divide operation (/) you sometimes need to multiply the numerator by 1.0.
+For example, instead of a / b use a * 1.0 / b to get the decimal result (when a and b are variables
+
+WITH date_comparisons AS (
+    -- Step 1: Compare every pair of dates for each asset
+    SELECT 
+        r1.asset_id,
+        r1.value AS newer_value,
+        r2.value AS older_value,
+        r1.date AS newer_date,
+        r2.date AS older_date,
+        (r1.value * 1.0 / r2.value) AS growth_ratio,
+        (julianday(r1.date) - julianday(r2.date)) AS day_difference
+    FROM real_estate r1
+    JOIN real_estate r2 
+        ON r1.asset_id = r2.asset_id
+        AND r1.date > r2.date  -- Ensure r1 is newer than r2
+    WHERE (julianday(r1.date) - julianday(r2.date)) >= 101  -- Only keep differences >= 101 days
+),
+max_ratios AS (
+    -- Step 2: Keep only the biggest ratio for each asset
+    SELECT 
+        asset_id,
+        MAX(growth_ratio) AS max_growth_ratio
+    FROM date_comparisons
+    GROUP BY asset_id
+)
+-- Step 3: Join with potential table and calculate ratio_forecast
+SELECT 
+    mr.asset_id,
+    (mr.max_growth_ratio * 1.0 / p.forecast) AS ratio_forecast
+FROM max_ratios mr
+JOIN potential p ON mr.asset_id = p.asset_id
+WHERE (mr.max_growth_ratio * 1.0 / p.forecast) > 1
+ORDER BY ratio_forecast DESC;
+
