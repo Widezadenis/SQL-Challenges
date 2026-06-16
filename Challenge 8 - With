@@ -13,3 +13,19 @@ Select AVG(ds.score) AS average_score
 From devices_score AS ds
 Join large_devices AS ld 
 ON ld.device_id = ds.device_id  
+
+A device's quality is measured by (width/height)*num_features.
+We want to find all of the overrated devices. Fetch all of the devices where the device's opinion is greater than the average quality and the device's score is less than the average quality. Return only the device_id.
+To solve it, use the WITH clause to create a subquery that calculates the average quality and reuse it in the main query.
+
+WITH overrated_devices AS (
+    Select AVG((width/height)*num_features) AS avg_quality 
+    From devices_specs
+)
+Select ds.device_id
+From devices_specs AS ds
+JOIN devices_score ds_score 
+ON ds.device_id = ds_score.device_id
+WHERE ds.opinion > (SELECT avg_quality FROM overrated_devices)
+  AND ds_score.score < (SELECT avg_quality FROM overrated_devices);
+
