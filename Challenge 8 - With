@@ -1,0 +1,5 @@
+write a query that:
+
+First identifies "large devices" (devices with width greater than 200)
+Then calculates the average score for these large devices. Call this column as average_score
+Use the WITH clause to solve this problem.
