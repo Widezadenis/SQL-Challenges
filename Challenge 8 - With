@@ -4,3 +4,12 @@ First identifies "large devices" (devices with width greater than 200)
 Then calculates the average score for these large devices. Call this column as average_score
 Use the WITH clause to solve this problem.
 
+With large_devices AS (
+    Select width, device_id
+    From devices_specs
+    Where width > 200
+)
+Select AVG(ds.score) AS average_score 
+From devices_score AS ds
+Join large_devices AS ld 
+ON ld.device_id = ds.device_id  
